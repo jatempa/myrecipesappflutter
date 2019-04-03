@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RecipeDetail extends StatefulWidget {
-  final DocumentSnapshot recipe;
+import 'recipe.dart';
 
-  RecipeDetail({this.recipe});
+class RecipeDetail extends StatefulWidget {
+  final DocumentSnapshot snapshot;
+
+  RecipeDetail(this.snapshot);
 
   RecipeDetailState createState() => RecipeDetailState();
 }
@@ -14,20 +15,19 @@ class RecipeDetailState extends State<RecipeDetail> {
   
   @override
   Widget build(BuildContext context) {
+    final recipe = Recipe.fromSnapshot(widget.snapshot);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.recipe.data["title"]),
+        title: Text(recipe.name),
       ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.only(bottom: 15, left: 8),
           child: Column(
             children: [  
-              Image.network(widget.recipe.data["image"]),
+              Image.network(recipe.imageUrl),
               Text("Ingredients", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-              Text(widget.recipe.data["ingredientLines"][0]),
-              Text(widget.recipe.data["ingredientLines"][1]),
-              Text(widget.recipe.data["ingredientLines"][2]),
             ],
           )
         ),

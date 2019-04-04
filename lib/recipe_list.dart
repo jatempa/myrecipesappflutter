@@ -10,6 +10,7 @@ class RecipeList extends StatefulWidget {
 }
 
 class RecipeListState extends State<RecipeList> {
+  Future _recipes;
 
   Future getRecipes() async {
     var firestore = Firestore.instance;
@@ -20,9 +21,17 @@ class RecipeListState extends State<RecipeList> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _recipes = getRecipes();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getRecipes(),
+      future: _recipes,
       builder: (_, snapshot) {
         if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
         return _buildList(context, snapshot.data);
@@ -42,9 +51,15 @@ class RecipeListState extends State<RecipeList> {
     return Column(
       children: [
         ListTile(
-          contentPadding: EdgeInsets.only(left: 8, bottom: 10),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
           leading: Image.network(recipe.imageUrl, height: 70, width: 70),
-          title: Text(recipe.name, style: Styles.headerLarge,),
+          title: RichText(
+            maxLines: 2,
+            text: TextSpan(
+              text: recipe.name,
+              style: Styles.headerLarge
+            )
+          ),
           subtitle: RichText(
             maxLines: 3,
             text: TextSpan(
@@ -52,6 +67,7 @@ class RecipeListState extends State<RecipeList> {
               style: Styles.textDefault,
             ),
           ),
+          trailing: Text(recipe.dietLabel, style: TextStyle(fontFamily: 'JosefinSans', fontSize: 12, fontWeight: FontWeight.bold, color: getColorByLabel(recipe.dietLabel))),
           onTap: () {
             Navigator.push(
               context,
@@ -65,4 +81,21 @@ class RecipeListState extends State<RecipeList> {
       ],
     );
   }  
+
+  Color getColorByLabel(String label) {
+    switch (label) {
+      case "Low-Fat":
+        return Styles.colorLowFat;
+      case "Low-Carb":
+        return Styles.colorLowCarb;
+      case "Low-Sodium":
+        return Styles.colorLowSodium;
+      case "Medium-Carb":
+        return Styles.colorMediumCarb;
+      case "Vegetarian":
+        return Styles.colorVegetarian;
+      case "Balanced":
+        return Styles.colorBalanced;
+    }
+  }
 }

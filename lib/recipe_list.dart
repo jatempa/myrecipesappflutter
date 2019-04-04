@@ -14,9 +14,7 @@ class RecipeListState extends State<RecipeList> {
 
   Future getRecipes() async {
     var firestore = Firestore.instance;
-
-    QuerySnapshot qn = await firestore.collection('recipes').getDocuments();
-
+    QuerySnapshot qn = await firestore.collection('recipes').orderBy('uid').getDocuments();
     return qn.documents;
   }
 
@@ -67,7 +65,7 @@ class RecipeListState extends State<RecipeList> {
               style: Styles.textDefault,
             ),
           ),
-          trailing: Text(recipe.dietLabel, style: TextStyle(fontFamily: 'JosefinSans', fontSize: 12, fontWeight: FontWeight.bold, color: getColorByLabel(recipe.dietLabel))),
+          trailing: Text(recipe.dietLabel, style: TextStyle(fontFamily: 'JosefinSans', fontSize: 15, fontWeight: FontWeight.w900, color: getColorByLabel(recipe.dietLabel))),
           onTap: () {
             Navigator.push(
               context,
@@ -84,6 +82,8 @@ class RecipeListState extends State<RecipeList> {
 
   Color getColorByLabel(String label) {
     switch (label) {
+      case "High-Fat":
+        return Styles.colorHighFat;
       case "Low-Fat":
         return Styles.colorLowFat;
       case "Low-Carb":

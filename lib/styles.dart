@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Styles {
-  static const _textSizeLarge = 16.0;
-  static const _textSizeDefault = 14.0;
+  static const _textSizeLarge = 17.0;
+  static const _textSizeDefault = 15.0;
   static final String _fontNameHeader = 'JosefinSans';
   
   static final colorLowCarb = Color.fromRGBO(102,51,153, 1);
+  static final colorHighFat = Color.fromRGBO(255,0,0, 1);
   static final colorLowFat = Color.fromRGBO(242,120,75, 1);
   static final colorLowSodium = Color.fromRGBO(244,208,63, 1);
   static final colorMediumCarb = Color.fromRGBO(210,82,127, 1);
@@ -15,6 +16,7 @@ class Styles {
   static final headerLarge = TextStyle(
     fontFamily: _fontNameHeader,
     fontSize: _textSizeLarge,
+    fontWeight: FontWeight.normal,
     color: Color.fromRGBO(0, 0, 0, 1),
   );
 

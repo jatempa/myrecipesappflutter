@@ -21,16 +21,21 @@ class RecipeDetailState extends State<RecipeDetail> {
       appBar: AppBar(
         title: Text(recipe.name),
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.only(bottom: 15, left: 8),
+      body: SingleChildScrollView(
+        child: Center(
           child: Column(
-            children: [  
-              Image.network(recipe.imageUrl),
-              Text("Ingredients", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            children: [
+              Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Image.network(recipe.imageUrl),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Text(recipe.description, style: TextStyle(fontSize: 16)),
+              ),
             ],
-          )
-        ),
+          ),
+        )
       )
     );
   }

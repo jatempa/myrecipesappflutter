@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'recipe.dart';
+import 'model/recipe.dart';
 
 class RecipeDetail extends StatefulWidget {
   final DocumentSnapshot snapshot;

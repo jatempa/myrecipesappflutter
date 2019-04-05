@@ -1,40 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'recipe.dart';
+import 'styles/styles.dart';
+import 'model/recipe.dart';
 import 'recipe_detail.dart';
-import 'styles.dart';
 
 class RecipeList extends StatefulWidget {
   RecipeListState createState() => RecipeListState();
 }
 
 class RecipeListState extends State<RecipeList> {
-  Future _recipes;
-
-  Future getRecipes() async {
-    var firestore = Firestore.instance;
-    QuerySnapshot qn = await firestore.collection('recipes').orderBy('uid').getDocuments();
-    return qn.documents;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _recipes = getRecipes();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _recipes,
-      builder: (_, snapshot) {
-        if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
-        return _buildList(context, snapshot.data);
-      }
-    );
+    return StreamBuilder<QuerySnapshot>(
+       stream: Firestore.instance.collection('recipes').snapshots(),
+       builder: (context, snapshot) {
+         if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
+    
+         return _buildList(context, snapshot.data.documents);
+       },
+     );
   }
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {

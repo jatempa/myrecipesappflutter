@@ -1,16 +1,13 @@
-# my_recipes_app
+# My Recipes App
 
-A new Flutter project.
+My first app with Flutter (stable version).
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+This app is based on demo from [raywenderlich.com](https://www.raywenderlich.com/155-android-listview-tutorial-with-kotlin). In this version I have replaced Kotlin for Dart programming language.
 
-A few resources to get you started if this is your first Flutter project:
+Also it's connected with Firestore from [Firebase](http://firebase.google.com) cloud provider.
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+## How it looks?
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+![Master-Detail Flutter App](preview.gif)

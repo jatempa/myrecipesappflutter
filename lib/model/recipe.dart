@@ -5,7 +5,6 @@ class Recipe {
   final String description;
   final String imageUrl;
   final String dietLabel;
-  final List<dynamic> ingredients;
   final DocumentReference reference;
 
   Recipe.fromMap(Map<String, dynamic> map, {this.reference}) 
@@ -13,12 +12,10 @@ class Recipe {
       assert(map['description'] != null),
       assert(map['image'] != null),
       assert(map['dietLabel'] != null),
-      assert(map['ingredientLines'] != null),
       name = map['title'],
       description = map['description'],
       imageUrl = map['image'],
-      dietLabel = map['dietLabel'],
-      ingredients = map['ingredientLines'];
+      dietLabel = map['dietLabel'];
   
   Recipe.fromSnapshot(DocumentSnapshot snapshot)
     : this.fromMap(snapshot.data, reference: snapshot.reference);

@@ -51,7 +51,7 @@ class RecipeListState extends State<RecipeList> {
               style: Styles.textDefault,
             ),
           ),
-          trailing: Text(recipe.dietLabel, style: TextStyle(fontFamily: 'JosefinSans', fontSize: 15, fontWeight: FontWeight.w900, color: getColorByLabel(recipe.dietLabel))),
+          trailing: Text(recipe.dietLabel, style: Styles.textDietLabel(recipe.dietLabel)),
           onTap: () {
             Navigator.push(
               context,
@@ -64,24 +64,5 @@ class RecipeListState extends State<RecipeList> {
         Divider(height: 30,),
       ],
     );
-  }  
-
-  Color getColorByLabel(String label) {
-    switch (label) {
-      case "High-Fat":
-        return Styles.colorHighFat;
-      case "Low-Fat":
-        return Styles.colorLowFat;
-      case "Low-Carb":
-        return Styles.colorLowCarb;
-      case "Low-Sodium":
-        return Styles.colorLowSodium;
-      case "Medium-Carb":
-        return Styles.colorMediumCarb;
-      case "Vegetarian":
-        return Styles.colorVegetarian;
-      case "Balanced":
-        return Styles.colorBalanced;
-    }
   }
 }

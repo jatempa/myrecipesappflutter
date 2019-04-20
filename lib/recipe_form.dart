@@ -37,7 +37,7 @@ class RecipeFormState extends State<RecipeForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            buildTextFormField('Enter the recipe name', 'Name', 'a name', 'name'),
+            buildTextFormField('Enter the recipe name', 'Name', 'a name', 'title'),
             buildTextFormField('Enter the recipe description', 'Description', 'the description', 'description'),
             buildTextFormField('Enter the recipe url image', 'Image', 'url image', 'image'),
             DropdownButtonFormField<String>(

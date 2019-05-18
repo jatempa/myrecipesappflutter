@@ -34,9 +34,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Color.fromRGBO(63,81,181, 1),
         onPressed: () => showDialog(
           context: context,
-          builder: (BuildContext context) {
-            return RecipeForm();
-          },
+          builder: (context) => RecipeForm()
         ),
       ),
     );

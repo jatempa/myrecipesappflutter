@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'model/recipe.dart';
+import 'styles/styles.dart';
 
 class RecipeDetail extends StatefulWidget {
   final DocumentSnapshot snapshot;
@@ -21,22 +22,19 @@ class RecipeDetailState extends State<RecipeDetail> {
       appBar: AppBar(
         title: Text(recipe.name),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Image.network(recipe.imageUrl),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text(recipe.description, style: TextStyle(fontSize: 16)),
-              ),
-            ],
-          ),
-        )
+      body: ListView(
+        children: [
+          _buildPadding(Image.network(recipe.imageUrl)),
+          _buildPadding(Text(recipe.description, style: Styles.textDefault)),
+        ],
       )
+    );
+  }
+
+  Widget _buildPadding(Widget content) {
+    return Padding(
+      padding: EdgeInsets.all(15.0),
+      child: content,
     );
   }
 }
